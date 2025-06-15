@@ -13,7 +13,7 @@ export default function HomePage() {
             {/* Poster Image */}
             <div className="relative mb-8">
               <Image
-                src="/villagil-poster.png"
+                src="/villagil-poster-new.jpg"
                 alt="VillaGil fest 2025 - Cartel oficial del festival"
                 width={800}
                 height={1000}
@@ -50,7 +50,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 poster-title">
-                  Festival de Música, Piscina, Beer Pong, Dardos y Barra Libre
+                  Música, Piscina, Beer Pong, Dardos, Billar y Barra Libre
                 </h2>
                 <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
                   VillaGil fest 2025 es la celebración más épica del verano. Música en vivo, piscina refrescante, juegos
@@ -63,42 +63,82 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Lineup Section */}
+      {/* Escenarios Section */}
       <section className="py-16 bg-gradient-to-r from-green-50 to-cyan-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-block bg-gradient-to-r from-pink-500 to-pink-600 text-white px-8 py-3 rounded-full text-2xl font-bold mb-6">
-              LINEUP
+              ESCENARIOS
             </div>
+            <p className="text-lg text-gray-600">3 escenarios únicos con los mejores artistas</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Escenario Piscina */}
             <Card className="bg-gradient-to-br from-cyan-400 to-blue-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6 text-center">🎵 Artistas</h3>
-                <div className="space-y-3 text-lg">
-                  <div className="font-semibold">• James Chastain</div>
-                  <div className="font-semibold">• Olivia Wilson</div>
-                  <div className="font-semibold">• Pedro Fernandes</div>
-                  <div className="font-semibold">• Phyllis Schwaiger</div>
-                  <div className="font-semibold">• Rachelle Beaudry</div>
-                  <div className="font-semibold">• Reese Miller</div>
-                  <div className="font-semibold">• Richard Sanchez</div>
-                  <div className="font-semibold">• Rosa María Aguado</div>
+                <div className="text-center mb-6">
+                  <div className="text-4xl mb-4">🏊‍♂️</div>
+                  <h3 className="text-2xl font-bold">Escenario Piscina</h3>
+                  <p className="text-cyan-100 mt-2">Música refrescante junto al agua</p>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="font-semibold">• Amor de Lesbiana</div>
+                  <div className="font-semibold">• Aparkamientos</div>
+                  <div className="font-semibold">• Arde Toledo</div>
+                  <div className="font-semibold">• Bosket a la Dieta</div>
+                  <div className="font-semibold">• Cownoise</div>
+                  <div className="font-semibold">• El Canto del Cuerpo</div>
+                  <div className="font-semibold">• El Sticker</div>
+                  <div className="font-semibold">• Enrique Stilos</div>
+                  <div className="font-semibold">• Gansos Rosas</div>
+                  <div className="font-semibold">• Good Gyal</div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-pink-500 to-pink-600 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
+            {/* Escenario Barbacoa */}
+            <Card className="bg-gradient-to-br from-orange-400 to-red-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6 text-center">👨‍🍳 Pop-up Kitchen</h3>
-                <div className="space-y-3 text-lg">
-                  <div className="font-semibold">• Chef Noah Schumacher</div>
-                  <div className="font-semibold">• Chef Rachelle Beaudry</div>
-                  <div className="font-semibold">• Chef Reese Miller</div>
+                <div className="text-center mb-6">
+                  <div className="text-4xl mb-4">🔥</div>
+                  <h3 className="text-2xl font-bold">Escenario Barbacoa</h3>
+                  <p className="text-orange-100 mt-2">Sabor y música al fuego</p>
                 </div>
-                <div className="mt-6 p-4 bg-white/20 rounded-lg">
-                  <p className="text-sm">Gastronomía de primera clase para acompañar la mejor música</p>
+                <div className="space-y-2 text-sm">
+                  <div className="font-semibold">• Good Puppy</div>
+                  <div className="font-semibold">• Ha Ha Hate You</div>
+                  <div className="font-semibold">• Imagine Unicorns</div>
+                  <div className="font-semibold">• Juan Ellegas</div>
+                  <div className="font-semibold">• La Rodella de Pegasso</div>
+                  <div className="font-semibold">• Lengua Park</div>
+                  <div className="font-semibold">• Los Gantos Rodados</div>
+                  <div className="font-semibold">• Los Chorizos Picantes</div>
+                  <div className="font-semibold">• Los Desgarrados</div>
+                  <div className="font-semibold">• Los Mojitos de Medianoche</div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Escenario Billar */}
+            <Card className="bg-gradient-to-br from-purple-400 to-pink-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <div className="text-4xl mb-4">🎱</div>
+                  <h3 className="text-2xl font-bold">Escenario Billar</h3>
+                  <p className="text-purple-100 mt-2">Ritmo y precisión</p>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="font-semibold">• Miguel Torres</div>
+                  <div className="font-semibold">• Nata y Warra</div>
+                  <div className="font-semibold">• Noloe</div>
+                  <div className="font-semibold">• Omar Montañas</div>
+                  <div className="font-semibold">• Penientos Rosos Picantes</div>
+                  <div className="font-semibold">• Rels A</div>
+                  <div className="font-semibold">• Sons of Ayuso</div>
+                  <div className="font-semibold">• The Aftersuns</div>
+                  <div className="font-semibold">• Verano del 97</div>
+                  <div className="font-semibold">• Viva Suiza</div>
                 </div>
               </CardContent>
             </Card>
@@ -109,28 +149,65 @@ export default function HomePage() {
       {/* Activities Section */}
       <section className="py-16 bg-gradient-to-r from-yellow-50 to-orange-50">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-green-400 to-green-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
-              <CardContent className="p-8 text-center">
+          <div className="text-center mb-12">
+            <div className="inline-block bg-gradient-to-r from-pink-500 to-pink-600 text-white px-8 py-3 rounded-full text-2xl font-bold mb-6">
+              ACTIVIDADES
+            </div>
+            <p className="text-lg text-gray-600">Diversión garantizada para todos los gustos</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Piscina */}
+            <Card className="bg-gradient-to-br from-cyan-400 to-blue-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-6 text-center">
                 <div className="text-4xl mb-4">🏊‍♂️</div>
-                <h3 className="text-2xl font-bold mb-4">Piscina</h3>
-                <p className="text-lg">Refréscate en nuestra piscina mientras suena la mejor música</p>
+                <h3 className="text-xl font-bold mb-3">Piscina</h3>
+                <p className="text-sm">Refréscate mientras disfrutas de la mejor música</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-yellow-400 to-orange-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
-              <CardContent className="p-8 text-center">
+            {/* Dardos */}
+            <Card className="bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <div className="text-4xl mb-4">🎯</div>
+                <h3 className="text-xl font-bold mb-3">Dardos</h3>
+                <p className="text-sm">Demuestra tu puntería en nuestro torneo de dardos</p>
+              </CardContent>
+            </Card>
+
+            {/* Beer Pong */}
+            <Card className="bg-gradient-to-br from-orange-400 to-red-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-6 text-center">
                 <div className="text-4xl mb-4">🍺</div>
-                <h3 className="text-2xl font-bold mb-4">Beer Pong & Dardos</h3>
-                <p className="text-lg">Compite con tus amigos en los juegos más divertidos</p>
+                <h3 className="text-xl font-bold mb-3">Beer Pong</h3>
+                <p className="text-sm">El clásico juego que nunca pasa de moda</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-pink-400 to-pink-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
-              <CardContent className="p-8 text-center">
+            {/* Billar */}
+            <Card className="bg-gradient-to-br from-purple-400 to-indigo-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <div className="text-4xl mb-4">🎱</div>
+                <h3 className="text-xl font-bold mb-3">Billar</h3>
+                <p className="text-sm">Mesas profesionales para los amantes del billar</p>
+              </CardContent>
+            </Card>
+
+            {/* Ping Pong */}
+            <Card className="bg-gradient-to-br from-yellow-400 to-orange-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-6 text-center">
+                <div className="text-4xl mb-4">🏓</div>
+                <h3 className="text-xl font-bold mb-3">Ping Pong</h3>
+                <p className="text-sm">Competiciones rápidas y emocionantes</p>
+              </CardContent>
+            </Card>
+
+            {/* Barra Libre */}
+            <Card className="bg-gradient-to-br from-pink-400 to-rose-500 text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-6 text-center">
                 <div className="text-4xl mb-4">🍹</div>
-                <h3 className="text-2xl font-bold mb-4">Barra Libre</h3>
-                <p className="text-lg">Disfruta de bebidas ilimitadas durante todo el evento</p>
+                <h3 className="text-xl font-bold mb-3">Barra Libre</h3>
+                <p className="text-sm">Bebidas ilimitadas durante todo el evento</p>
               </CardContent>
             </Card>
           </div>
@@ -187,13 +264,13 @@ export default function HomePage() {
               </a>
             </div>
             <div className="space-y-2 text-lg">
-              <p>🌐 www.reallygreatsite.com</p>
+              <p>🌐 villa-gil.vercel.app</p>
               <p>📧 hello@reallygreatsite.com</p>
               <p>📱 648 05 73 00</p>
             </div>
             <div className="mt-8 pt-8 border-t border-white/20">
               <p className="text-white/80">© 2025 VillaGil fest. Todos los derechos reservados.</p>
-              <p className="text-sm text-white/60 mt-2">Get your ticket at www.reallygreatsite.com</p>
+              <p className="text-sm text-white/60 mt-2">Get your ticket at villa-gil.vercel.app</p>
             </div>
           </div>
         </div>

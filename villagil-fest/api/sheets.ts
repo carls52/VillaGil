@@ -11,13 +11,15 @@ interface Participant {
 // Función para leer datos de Google Sheets
 export async function getParticipants(): Promise<Participant[]> {
   try {
+console.error("get participants");
     const range = `${SHEET_NAME}!A:B` // Columnas A (Nombre) y B (Puntos)
+    console.error(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${GOOGLE_SHEETS_API_KEY}`);
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${GOOGLE_SHEETS_API_KEY}`
 
     const response = await fetch(url)
 
     if (!response.ok) {
-      throw new Error(`Error fetching data: ${response.statusText}`)
+      throw new Error(`Error fetching data: ${response.statusText} \n ${url}`)
     }
 
     const data = await response.json()

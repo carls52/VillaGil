@@ -1,47 +1,24 @@
 "use client"
 
 import { useState } from "react"
-import { Medal, Award, Crown, Star } from "lucide-react"
+import { useRanking } from "../../hooks/useRanking"
+import { Medal, Award, Crown, Star, RefreshCw, Plus, AlertCircle } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
-interface Participant {
-  id: number
-  name: string
-  points: number
-  position: number
-}
-
 export default function RankingPage() {
-  const [participants, setParticipants] = useState<Participant[]>([
-    { id: 1, name: "María González", points: 2850, position: 1 },
-    { id: 2, name: "Carlos Rodríguez", points: 2720, position: 2 },
-    { id: 3, name: "Ana Martínez", points: 2650, position: 3 },
-    { id: 4, name: "Luis Fernández", points: 2480, position: 4 },
-    { id: 5, name: "Sofia López", points: 2350, position: 5 },
-    { id: 6, name: "Diego Ruiz", points: 2200, position: 6 },
-    { id: 7, name: "Carmen Jiménez", points: 2150, position: 7 },
-    { id: 8, name: "Pablo Moreno", points: 2050, position: 8 },
-  ])
+  const { participants, loading, error, lastUpdated, refetch, updateParticipant } = useRanking()
+  const [updating, setUpdating] = useState<string | null>(null)
 
-  const [isLoading, setIsLoading] = useState(false)
-
-  // Función para actualizar datos desde API externa (preparada para el futuro)
-  const updateRanking = async () => {
-    setIsLoading(true)
+  const handleUpdatePoints = async (participantName: string) => {
     try {
-      // Aquí se conectará a la API externa en Vercel
-      // const response = await fetch('/api/update?id=123')
-      // const data = await response.json()
-      // setParticipants(data.participants)
-
-      // Simulación de actualización por ahora
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log("Ranking actualizado (simulación)")
+      setUpdating(participantName)
+      await updateParticipant(participantName, 100)
     } catch (error) {
-      console.error("Error actualizando ranking:", error)
+      console.error("Error updating points:", error)
+      alert(`Error al actualizar puntos: ${error instanceof Error ? error.message : "Error desconocido"}`)
     } finally {
-      setIsLoading(false)
+      setUpdating(null)
     }
   }
 
@@ -71,6 +48,58 @@ export default function RankingPage() {
     }
   }
 
+  if (loading) {
+    return (
+      <div className="min-h-screen py-8">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h1 className="poster-title text-5xl md:text-7xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400 drop-shadow-lg">
+              Leaderboard
+            </h1>
+          </div>
+          <div className="flex justify-center items-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500"></div>
+            <span className="ml-4 text-lg text-gray-600">Cargando ranking desde Google Sheets...</span>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen py-8">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h1 className="poster-title text-5xl md:text-7xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400 drop-shadow-lg">
+              Leaderboard
+            </h1>
+          </div>
+          <div className="text-center py-12">
+            <AlertCircle className="h-16 w-16 text-red-500 mx-auto mb-4" />
+            <div className="text-red-500 text-lg mb-4">Error: {error}</div>
+            <p className="text-gray-600 mb-6">
+              Verifica que las variables de entorno estén configuradas correctamente:
+            </p>
+            <div className="bg-gray-100 p-4 rounded-lg text-left max-w-md mx-auto mb-6">
+              <code className="text-sm">
+                GOOGLE_SHEETS_ID=tu_spreadsheet_id
+                <br />
+                GOOGLE_SHEETS_API_KEY=tu_api_key
+              </code>
+            </div>
+            <Button
+              onClick={refetch}
+              className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold"
+            >
+              Reintentar
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
@@ -79,75 +108,169 @@ export default function RankingPage() {
           <h1 className="poster-title text-5xl md:text-7xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400 drop-shadow-lg">
             Leaderboard
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-8">¡Mira quién está dominando el festival!</p>
-          <Button
-            onClick={updateRanking}
-            disabled={isLoading}
-            className="bg-gradient-to-r from-pink-500 to-cyan-400 hover:from-pink-600 hover:to-cyan-500 text-white font-bold px-8 py-3 rounded-full shadow-xl transform hover:scale-105 transition-all duration-300"
-          >
-            {isLoading ? "Actualizando..." : "🔄 Actualizar Ranking"}
-          </Button>
-        </div>
+          <p className="text-xl md:text-2xl text-gray-700 mb-4">¡Mira quién está dominando el festival!</p>
+          <p className="text-lg text-gray-600 mb-6">Ranking en tiempo real desde Google Sheets</p>
 
-        {/* Top 3 Podium */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {participants.slice(0, 3).map((participant, index) => (
-            <Card
-              key={participant.id}
-              className={`bg-gradient-to-br ${getPositionColor(participant.position)} text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300 ${
-                participant.position === 1
-                  ? "md:order-2 scale-110"
-                  : participant.position === 2
-                    ? "md:order-1"
-                    : "md:order-3"
-              }`}
+          <div className="flex justify-center items-center space-x-4">
+            <Button
+              onClick={refetch}
+              disabled={loading}
+              className="bg-gradient-to-r from-pink-500 to-cyan-400 hover:from-pink-600 hover:to-cyan-500 text-white font-bold px-6 py-3 rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-2"
             >
-              <CardContent className="p-6 text-center">
-                <div className="mb-4">{getPositionIcon(participant.position)}</div>
-                <div className="text-3xl font-bold mb-2">#{participant.position}</div>
-                <h3 className="text-xl font-bold mb-2">{participant.name}</h3>
-                <div className="text-2xl font-black">{participant.points.toLocaleString()} pts</div>
-              </CardContent>
-            </Card>
-          ))}
+              <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+              <span>Actualizar</span>
+            </Button>
+          </div>
+
+          {lastUpdated && (
+            <p className="text-sm text-gray-500 mt-4">
+              Última actualización: {new Date(lastUpdated).toLocaleString("es-ES")}
+            </p>
+          )}
         </div>
 
-        {/* Rest of participants */}
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 festival-text">Resto de Participantes</h2>
-          {participants.slice(3).map((participant) => (
-            <Card
-              key={participant.id}
-              className="bg-white/80 backdrop-blur-sm shadow-lg border-0 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
-            >
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className={`bg-gradient-to-r ${getPositionColor(participant.position)} p-3 rounded-full`}>
-                      {getPositionIcon(participant.position)}
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-gray-800">#{participant.position}</div>
-                      <h3 className="text-xl font-semibold text-gray-700">{participant.name}</h3>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-black text-purple-600">{participant.points.toLocaleString()}</div>
-                    <div className="text-gray-500 font-medium">puntos</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        {participants.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-xl text-gray-600">No hay participantes en el ranking aún.</p>
+            <p className="text-gray-500 mt-2">Los datos se cargarán desde Google Sheets cuando estén disponibles.</p>
+          </div>
+        ) : (
+          <>
+            {/* Top 3 Podium */}
+            {participants.length >= 3 && (
+              <div className="grid md:grid-cols-3 gap-6 mb-12">
+                {participants.slice(0, 3).map((participant) => (
+                  <Card
+                    key={participant.nombre}
+                    className={`bg-gradient-to-br ${getPositionColor(participant.position!)} text-white shadow-2xl border-0 transform hover:scale-105 transition-all duration-300 ${
+                      participant.position === 1
+                        ? "md:order-2 scale-110"
+                        : participant.position === 2
+                          ? "md:order-1"
+                          : "md:order-3"
+                    }`}
+                  >
+                    <CardContent className="p-6 text-center">
+                      <div className="mb-4">{getPositionIcon(participant.position!)}</div>
+                      <div className="text-3xl font-bold mb-2">#{participant.position}</div>
+                      <h3 className="text-xl font-bold mb-2">{participant.nombre}</h3>
+                      <div className="text-2xl font-black mb-4">{participant.puntos.toLocaleString()} pts</div>
 
-        {/* API Info */}
+                      {/* Botón para agregar puntos */}
+                      <Button
+                        onClick={() => handleUpdatePoints(participant.nombre)}
+                        disabled={updating === participant.nombre}
+                        className="bg-white/20 hover:bg-white/30 text-white font-semibold px-4 py-2 rounded-full transition-all duration-300 flex items-center space-x-2 mx-auto"
+                      >
+                        <Plus className="h-4 w-4" />
+                        <span>{updating === participant.nombre ? "Actualizando..." : "+100"}</span>
+                      </Button>
+
+                      {participant.position === 1 && (
+                        <div className="mt-4">
+                          <span className="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            👑 Campeón
+                          </span>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+
+            {/* Resto de participantes */}
+            <div className="space-y-4">
+              {participants.length > 3 && (
+                <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 festival-text">
+                  Resto de Participantes
+                </h2>
+              )}
+              {participants.slice(3).map((participant) => (
+                <Card
+                  key={participant.nombre}
+                  className="bg-white/80 backdrop-blur-sm shadow-lg border-0 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className={`bg-gradient-to-r ${getPositionColor(participant.position!)} p-3 rounded-full`}>
+                          {getPositionIcon(participant.position!)}
+                        </div>
+                        <div>
+                          <div className="text-2xl font-bold text-gray-800">#{participant.position}</div>
+                          <h3 className="text-xl font-semibold text-gray-700">{participant.nombre}</h3>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <div className="text-right">
+                          <div className="text-3xl font-black text-purple-600">
+                            {participant.puntos.toLocaleString()}
+                          </div>
+                          <div className="text-gray-500 font-medium">puntos</div>
+                        </div>
+
+                        {/* Botón para agregar puntos */}
+                        <Button
+                          onClick={() => handleUpdatePoints(participant.nombre)}
+                          disabled={updating === participant.nombre}
+                          className="bg-gradient-to-r from-pink-500 to-cyan-400 hover:from-pink-600 hover:to-cyan-500 text-white font-semibold px-4 py-2 rounded-full transition-all duration-300 flex items-center space-x-2"
+                        >
+                          <Plus className="h-4 w-4" />
+                          <span>{updating === participant.nombre ? "Actualizando..." : "+100"}</span>
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Stats Section */}
+            <div className="mt-16 grid md:grid-cols-3 gap-6">
+              <Card className="bg-gradient-to-br from-pink-100 to-pink-200 shadow-lg border-0">
+                <CardContent className="p-6 text-center">
+                  <div className="text-3xl font-bold text-pink-600 mb-2">{participants.length}</div>
+                  <div className="text-gray-700 font-medium">Participantes Totales</div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-cyan-100 to-cyan-200 shadow-lg border-0">
+                <CardContent className="p-6 text-center">
+                  <div className="text-3xl font-bold text-cyan-600 mb-2">
+                    {participants[0]?.puntos.toLocaleString() || 0}
+                  </div>
+                  <div className="text-gray-700 font-medium">Puntuación Máxima</div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-green-100 to-green-200 shadow-lg border-0">
+                <CardContent className="p-6 text-center">
+                  <div className="text-3xl font-bold text-green-600 mb-2">
+                    {participants.length > 0
+                      ? Math.round(
+                          participants.reduce((acc, p) => acc + p.puntos, 0) / participants.length,
+                        ).toLocaleString()
+                      : 0}
+                  </div>
+                  <div className="text-gray-700 font-medium">Puntuación Media</div>
+                </CardContent>
+              </Card>
+            </div>
+          </>
+        )}
+
+        {/* Información técnica */}
         <div className="mt-12 p-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl">
-          <h3 className="text-xl font-bold text-gray-800 mb-2">🔧 Información Técnica</h3>
-          <p className="text-gray-700">
-            Este ranking está preparado para conectarse a una API externa. Endpoint de ejemplo:{" "}
-            <code className="bg-white px-2 py-1 rounded text-sm">/api/update?id=123</code>
-          </p>
+          <h3 className="text-xl font-bold text-gray-800 mb-2">🔧 Sistema Dinámico</h3>
+          <p className="text-gray-700 mb-2">Este ranking se actualiza en tiempo real desde Google Sheets.</p>
+          <div className="text-sm text-gray-600">
+            <p>
+              • API Endpoint: <code className="bg-white px-2 py-1 rounded">/api/update?id=NombreParticipante</code>
+            </p>
+            <p>• Cada actualización suma 100 puntos al participante</p>
+            <p>• Los datos se sincronizan automáticamente con la hoja de cálculo</p>
+          </div>
         </div>
       </div>
     </div>

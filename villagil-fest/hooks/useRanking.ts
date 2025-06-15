@@ -28,13 +28,23 @@ export function useRanking() {
     try {
       setData((prev) => ({ ...prev, loading: true, error: null }))
 
-      const response = await fetch("/api/ranking")
+      const response = await fetch("/api/ranking", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
 
       if (!response.ok) {
-        throw new Error("Failed to fetch ranking")
+        const errorText = await response.text()
+        throw new Error(`HTTP ${response.status}: ${errorText}`)
       }
 
       const result = await response.json()
+
+      if (!result.success) {
+        throw new Error(result.error || "Failed to fetch ranking")
+      }
 
       // Agregar posiciones a los participantes
       const participantsWithPositions = result.data.map((participant: Participant, index: number) => ({
@@ -53,7 +63,7 @@ export function useRanking() {
       setData((prev) => ({
         ...prev,
         loading: false,
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: error instanceof Error ? error.message : "Unknown error occurred",
       }))
     }
   }, [])
@@ -74,10 +84,15 @@ export function useRanking() {
         })
 
         if (!response.ok) {
-          throw new Error("Failed to update participant")
+          const errorData = await response.json()
+          throw new Error(errorData.error || "Failed to update participant")
         }
 
         const result = await response.json()
+
+        if (!result.success) {
+          throw new Error(result.error || "Update failed")
+        }
 
         // Refrescar el ranking después de la actualización
         await fetchRanking()

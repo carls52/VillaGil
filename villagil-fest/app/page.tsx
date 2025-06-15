@@ -103,7 +103,7 @@ export default function HomePage() {
                     </p>
 
                     <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
-                      <p className="text-red-700 font-semibold flex items-center">
+                      <p className="text-red-700 font-semibold items-center">
                         <span className="text-2xl mr-2">🚫</span>
                         Pero cuidado: <strong>queda prohibida la purpurina</strong> por el bien de la piscina y las
                         instalaciones.
@@ -331,7 +331,7 @@ export default function HomePage() {
                     variant="secondary"
                     className="bg-white text-cyan-600 hover:bg-cyan-50 font-bold mt-6 px-8 py-3"
                   >
-                    Ver en Google Maps
+                    <a href="https://maps.app.goo.gl/sLW7HyLWBtHtsB2g9">Ver en Google Maps</a>
                   </Button>
                 </div>
               </div>

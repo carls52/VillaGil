@@ -1,4 +1,4 @@
-import { MapPin, Music, Instagram, Twitter, Facebook } from "lucide-react"
+import { MapPin, Music, Instagram, Twitter, Facebook, Sparkles, Utensils } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
@@ -38,28 +38,121 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Welcome Section */}
-      <section className="py-16 bg-gradient-to-r from-cyan-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <Card className="bg-white/90 backdrop-blur-sm shadow-2xl border-0 overflow-hidden">
-            <CardContent className="p-8 md:p-12">
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="bg-gradient-to-r from-pink-500 to-cyan-400 p-4 rounded-full">
-                    <Music className="h-16 w-16 text-white" />
+      {/* Event Description Section */}
+      <section className="py-16 bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-pink-300 rounded-full blur-xl"></div>
+          <div className="absolute bottom-20 right-20 w-40 h-40 bg-cyan-300 rounded-full blur-xl"></div>
+          <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-yellow-300 rounded-full blur-xl"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 poster-title">Descripción del Evento</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-pink-500 to-cyan-400 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="max-w-6xl mx-auto space-y-8">
+            {/* Introducción General */}
+            <Card className="bg-white/80 backdrop-blur-sm shadow-2xl border-0 overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
+              <CardContent className="p-8 md:p-12">
+                <div className="text-center">
+                  <div className="flex justify-center mb-6">
+                    <div className="bg-gradient-to-r from-pink-500 to-cyan-400 p-4 rounded-full">
+                      <Music className="h-12 w-12 text-white" />
+                    </div>
                   </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 festival-text">
+                    🎉 El Evento del Verano
+                  </h3>
+                  <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-6">
+                    VillaGil Fest 2025 no es solo un festival, es <strong>LA experiencia</strong> que definirá tu
+                    verano. Prepárate para vivir una jornada épica donde la música, la diversión y los momentos
+                    inolvidables se fusionan en el evento más esperado del año.
+                  </p>
+                  <p className="text-md md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Disfruta de piscina refrescante, competiciones de dardos, beer pong, billar y ping pong, todo
+                    acompañado de una barra libre que te mantendrá con energía. Además, contamos con
+                    <span className="font-semibold text-pink-600"> 3 escenarios activos</span> durante todo el día con
+                    los mejores artistas del momento.
+                  </p>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 poster-title">
-                  Música, Piscina, Beer Pong, Dardos, Billar y Barra Libre
-                </h2>
-                <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                  VillaGil fest 2025 es la celebración más épica del verano. Música en vivo, piscina refrescante, juegos
-                  divertidos y una barra libre que te hará bailar hasta el amanecer. ¡Una experiencia tropical que no
-                  olvidarás jamás!
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Dress Code */}
+              <Card className="bg-gradient-to-br from-pink-100 to-purple-100 shadow-2xl border-0 overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
+                <CardContent className="p-8">
+                  <div className="text-center mb-6">
+                    <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-full inline-block mb-4">
+                      <Sparkles className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800 festival-text">🎟️ Dress Code</h3>
+                  </div>
+
+                  <div className="space-y-4 text-gray-700">
+                    <p className="text-lg font-medium text-center text-pink-700">
+                      Ven como irías a tu festival favorito... porque este lo es.
+                    </p>
+
+                    <p className="text-md leading-relaxed">
+                      Camisas extravagantes, brillos de todos los tipos y looks inolvidables son más que bienvenidos.
+                      ¡Queremos verte brillar tanto como la música que sonará!
+                    </p>
+
+                    <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
+                      <p className="text-red-700 font-semibold flex items-center">
+                        <span className="text-2xl mr-2">🚫</span>
+                        Pero cuidado: <strong>queda prohibida la purpurina</strong> por el bien de la piscina y las
+                        instalaciones.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Comida y Bebida */}
+              <Card className="bg-gradient-to-br from-orange-100 to-yellow-100 shadow-2xl border-0 overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
+                <CardContent className="p-8">
+                  <div className="text-center mb-6">
+                    <div className="bg-gradient-to-r from-orange-500 to-yellow-600 p-3 rounded-full inline-block mb-4">
+                      <Utensils className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800 festival-text">🍹 Barra Libre & Cena</h3>
+                  </div>
+
+                  <div className="space-y-4 text-gray-700">
+                    <p className="text-lg font-medium text-center text-orange-700">
+                      Todo incluido para que solo te preocupes de disfrutar
+                    </p>
+
+                    <div className="space-y-3">
+                      <div className="flex items-start space-x-3">
+                        <span className="text-xl">🍺</span>
+                        <p className="text-md">
+                          <strong>Barra libre</strong> con cervezas, refrescos y mojitos (hasta fin de existencias)
+                        </p>
+                      </div>
+
+                      <div className="flex items-start space-x-3">
+                        <span className="text-xl">🍽️</span>
+                        <p className="text-md">
+                          La <strong>cena está incluida</strong> en tu entrada
+                        </p>
+                      </div>
+
+                      <div className="flex items-start space-x-3">
+                        <span className="text-xl">🤝</span>
+                        <p className="text-md">¡Y si quieres traer algo para compartir, será más que bienvenido!</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </section>
 

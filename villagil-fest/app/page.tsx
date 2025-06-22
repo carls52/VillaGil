@@ -179,9 +179,9 @@ export default function HomePage() {
                   <div className="font-semibold">• Amor de Lesbiana</div>
                   <div className="font-semibold">• Aparkamientos</div>
                   <div className="font-semibold">• Arde Toledo</div>
-                  <div className="font-semibold">• Bosket a la Dieta</div>
+                  <div className="font-semibold">• Boikot a la Dieta</div>
                   <div className="font-semibold">• Cownoise</div>
-                  <div className="font-semibold">• El Canto del Cuerpo</div>
+                  <div className="font-semibold">• El Canto del Cuerdo</div>
                   <div className="font-semibold">• El Sticker</div>
                   <div className="font-semibold">• Enrique Stilos</div>
                   <div className="font-semibold">• Gansos Rosas</div>
@@ -202,12 +202,12 @@ export default function HomePage() {
                   <div className="font-semibold">• Good Puppy</div>
                   <div className="font-semibold">• Ha Ha Hate You</div>
                   <div className="font-semibold">• Imagine Unicorns</div>
-                  <div className="font-semibold">• Juan Ellegas</div>
-                  <div className="font-semibold">• La Rodella de Pegasso</div>
-                  <div className="font-semibold">• Lengua Park</div>
-                  <div className="font-semibold">• Los Gantos Rodados</div>
+                  <div className="font-semibold">• Juan Illescas</div>
+                  <div className="font-semibold">• La Rodilla de Picasso</div>
+                  <div className="font-semibold">• Lincoln Park</div>
+                  <div className="font-semibold">• Los Cantos Rodados</div>
                   <div className="font-semibold">• Los Chorizos Picantes</div>
-                  <div className="font-semibold">• Los Desgarrados</div>
+                  <div className="font-semibold">• Los Escarabajos</div>
                   <div className="font-semibold">• Los Mojitos de Medianoche</div>
                 </div>
               </CardContent>
@@ -224,9 +224,9 @@ export default function HomePage() {
                 <div className="space-y-2 text-sm">
                   <div className="font-semibold">• Miguel Torres</div>
                   <div className="font-semibold">• Nata y Warra</div>
-                  <div className="font-semibold">• Noloe</div>
+                  <div className="font-semibold">• Noloé</div>
                   <div className="font-semibold">• Omar Montañas</div>
-                  <div className="font-semibold">• Penientos Rosos Picantes</div>
+                  <div className="font-semibold">• Pimientos Rojos Picantes</div>
                   <div className="font-semibold">• Rels A</div>
                   <div className="font-semibold">• Sons of Ayuso</div>
                   <div className="font-semibold">• The Aftersuns</div>

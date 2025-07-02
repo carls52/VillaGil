@@ -13,7 +13,7 @@ export async function getParticipants(): Promise<Participant[]> {
   try {
     const range = `${SHEET_NAME}!A:B` // Columnas A (Nombre) y B (Puntos)
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${GOOGLE_SHEETS_API_KEY}`
-
+ console.error(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${GOOGLE_SHEETS_API_KEY}`);
 
     const response = await fetch(url)
 

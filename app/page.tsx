@@ -2,6 +2,7 @@ import { MapPin, Music, Instagram, Twitter, Facebook, Sparkles, Utensils } from 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function HomePage() {
   return (
@@ -25,10 +26,11 @@ export default function HomePage() {
             {/* Call to Action */}
             <div className="text-center">
               <Button
+                asChild
                 size="lg"
                 className="bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-bold text-xl px-12 py-6 rounded-full shadow-xl transform hover:scale-105 transition-all duration-300 mb-4"
               >
-                🎫 ¡Consigue tu entrada!
+                <Link href="/registro">🎫 ¡Consigue tu entrada!</Link>
               </Button>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 12 de Julio, 2025 • Apertura de puertas 17:00 • ¡Carlitos cumple 28!

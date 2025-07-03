@@ -27,6 +27,14 @@ export default function Navigation() {
               <span className="font-medium">Inicio</span>
             </Link>
             <Link
+              href="/registro"
+              className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-300 ${
+                pathname === "/registro" ? "bg-white/20 text-white" : "text-white/80 hover:text-white hover:bg-white/10"
+              }`}
+            >
+              <span className="font-medium">🎫 Registro</span>
+            </Link>
+            <Link
               href="/ranking"
               className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-300 ${
                 pathname === "/ranking" ? "bg-white/20 text-white" : "text-white/80 hover:text-white hover:bg-white/10"

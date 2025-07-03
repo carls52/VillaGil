@@ -1,26 +1,11 @@
 "use client"
-
-import { useState } from "react"
 import { useRanking } from "../../hooks/useRanking"
-import { Medal, Award, Crown, Star, RefreshCw, Plus, AlertCircle } from "lucide-react"
+import { Medal, Award, Crown, Star, RefreshCw, AlertCircle } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 export default function RankingPage() {
-  const { participants, loading, error, lastUpdated, refetch, updateParticipant } = useRanking()
-  const [updating, setUpdating] = useState<string | null>(null)
-
-  const handleUpdatePoints = async (participantName: string) => {
-    try {
-      setUpdating(participantName)
-      await updateParticipant(participantName, 100)
-    } catch (error) {
-      console.error("Error updating points:", error)
-      alert(`Error al actualizar puntos: ${error instanceof Error ? error.message : "Error desconocido"}`)
-    } finally {
-      setUpdating(null)
-    }
-  }
+  const { participants, loading, error, lastUpdated, refetch } = useRanking()
 
   const getPositionIcon = (position: number) => {
     switch (position) {
@@ -156,16 +141,6 @@ export default function RankingPage() {
                       <h3 className="text-xl font-bold mb-2">{participant.nombre}</h3>
                       <div className="text-2xl font-black mb-4">{participant.puntos.toLocaleString()} pts</div>
 
-                      {/* Botón para agregar puntos */}
-                      <Button
-                        onClick={() => handleUpdatePoints(participant.nombre)}
-                        disabled={updating === participant.nombre}
-                        className="bg-white/20 hover:bg-white/30 text-white font-semibold px-4 py-2 rounded-full transition-all duration-300 flex items-center space-x-2 mx-auto"
-                      >
-                        <Plus className="h-4 w-4" />
-                        <span>{updating === participant.nombre ? "Actualizando..." : "+100"}</span>
-                      </Button>
-
                       {participant.position === 1 && (
                         <div className="mt-4">
                           <span className="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -209,16 +184,6 @@ export default function RankingPage() {
                           </div>
                           <div className="text-gray-500 font-medium">puntos</div>
                         </div>
-
-                        {/* Botón para agregar puntos */}
-                        <Button
-                          onClick={() => handleUpdatePoints(participant.nombre)}
-                          disabled={updating === participant.nombre}
-                          className="bg-gradient-to-r from-pink-500 to-cyan-400 hover:from-pink-600 hover:to-cyan-500 text-white font-semibold px-4 py-2 rounded-full transition-all duration-300 flex items-center space-x-2"
-                        >
-                          <Plus className="h-4 w-4" />
-                          <span>{updating === participant.nombre ? "Actualizando..." : "+100"}</span>
-                        </Button>
                       </div>
                     </div>
                   </CardContent>
@@ -263,14 +228,9 @@ export default function RankingPage() {
         {/* Información técnica */}
         <div className="mt-12 p-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl">
           <h3 className="text-xl font-bold text-gray-800 mb-2">🔧 Sistema Dinámico</h3>
-          <p className="text-gray-700 mb-2">Este ranking se actualiza en tiempo real desde Google Sheets.</p>
-          <div className="text-sm text-gray-600">
-            <p>
-              • API Endpoint: <code className="bg-white px-2 py-1 rounded">/api/update?id=NombreParticipante</code>
-            </p>
-            <p>• Cada actualización suma 100 puntos al participante</p>
-            <p>• Los datos se sincronizan automáticamente con la hoja de cálculo</p>
-          </div>
+          <p className="text-gray-700 mb-2">
+            Este ranking se actualiza desde Google Sheets y se puede gestionar desde el panel de administración.
+          </p>
         </div>
       </div>
     </div>

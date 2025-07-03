@@ -37,8 +37,8 @@ function checkEnvironmentVariables() {
   console.log("✅ Variables de entorno verificadas correctamente")
 }
 
-// Función para generar JWT token para Service Account
-async function getAccessToken(): Promise<string> {
+// Función para generar JWT token para Service Account (EXPORTADA)
+export async function getAccessToken(): Promise<string> {
   console.log("🔐 Generando access token...")
 
   // Crear JWT header
